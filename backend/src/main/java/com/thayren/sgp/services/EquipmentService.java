@@ -40,5 +40,13 @@ public class EquipmentService {
 		entity = repository.save(entity);
 		return entity;
 	}
+	
+	@Transactional
+	public Equipment update(Long id, Equipment equipment) {
+		Equipment entity = repository.getOne(id);
+		entity.setModel(equipment.getModel());
+		entity = repository.save(entity);
+		return entity;
+	}
 
 }
