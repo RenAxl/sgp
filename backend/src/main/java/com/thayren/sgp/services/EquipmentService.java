@@ -32,5 +32,13 @@ public class EquipmentService {
 		
 		return entity;
 	}
+	
+	@Transactional
+	public Equipment insert(Equipment equipment) {
+		Equipment entity = new Equipment();
+		entity.setModel(equipment.getModel());
+		entity = repository.save(entity);
+		return entity;
+	}
 
 }
