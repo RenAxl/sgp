@@ -48,5 +48,9 @@ public class EquipmentService {
 		entity = repository.save(entity);
 		return entity;
 	}
+	
+	public void delete(Long id) {
+		repository.deleteById(id);
+	}
 
 }
