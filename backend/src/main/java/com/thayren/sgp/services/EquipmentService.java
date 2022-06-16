@@ -2,6 +2,7 @@ package com.thayren.sgp.services;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -24,6 +25,12 @@ public class EquipmentService {
 		return list;
 	}
 	
-	
+	@Transactional(readOnly = true)
+	public Equipment findById(Long id) {
+		Optional<Equipment> obj = repository.findById(id);
+		Equipment entity = obj.get();
+		
+		return entity;
+	}
 
 }
