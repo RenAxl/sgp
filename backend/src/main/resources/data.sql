@@ -36,3 +36,12 @@ INSERT INTO tb_card (model, feature, functionality, connection, reset_procedure,
 INSERT INTO tb_card (model, feature, functionality, connection, reset_procedure, exchange_procedure, img_url) VALUES ('Amplificadora TX Huawei', 'Placa amplificadora de saída', 'Consegue medir nível de saída', 'conecta ao DGO ou a uma placa mux/demux', 'Retirar do slot e aguardar 10 segundos para retornar, não há configuração para reset', 'Retirar a placa do slot e colocar a placa sobressalente, não há configuração para troca', 'https://raw.githubusercontent.com/devsuperior/dscatalog-resources/master/backend/img/1-big.jpg');
 INSERT INTO tb_card (model, feature, functionality, connection, reset_procedure, exchange_procedure, img_url) VALUES ('Transponder 20GB', 'Placa que possui capacidade de ter sinal de 20GB no lado rede', 'Consegue medir potência de entrada e saida e efetuar perfomance', 'conecta ao DGO ou a uma placa mux/demux', 'Retirar do slot e aguardar 10 segundos para retornar, não há configuração para reset', 'Retirar a placa do slot e colocar a placa sobressalente, não há configuração para troca', 'https://raw.githubusercontent.com/devsuperior/dscatalog-resources/master/backend/img/1-big.jpg');
 INSERT INTO tb_card (model, feature, functionality, connection, reset_procedure, exchange_procedure, img_url) VALUES ('Amplificadora RX Ciena', 'Placa amplificadora de entrada', 'Consegue medir nível de potência de entrada', 'conecta ao DGO ou a uma placa mux/demux', 'Retirar do slot e aguardar 10 segundos para retornar, não há configuração para reset', 'Retirar a placa do slot e colocar a placa sobressalente, não há configuração para troca', 'https://raw.githubusercontent.com/devsuperior/dscatalog-resources/master/backend/img/1-big.jpg');
+
+
+INSERT INTO tb_user (name, email, password) VALUES ('Axl', 'axl@gmail.com', '$2a$10$eACCYoNOHEqXve8aIWT8Nu3PkMXWBaOxJ9aORUYzfMQCbVBIhZ8tG');
+INSERT INTO tb_user (name, email, password) VALUES ('Rose', 'rose@gmail.com', '$2a$10$eACCYoNOHEqXve8aIWT8Nu3PkMXWBaOxJ9aORUYzfMQCbVBIhZ8tG');
+
+INSERT INTO tb_role (authority) VALUES ('ROLE_OPERATOR');
+INSERT INTO tb_role (authority) VALUES ('ROLE_ADMIN');
+
+
