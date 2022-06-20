@@ -47,6 +47,11 @@ public class UserService {
 		
 		return entity;
 	}
+	
+	@Transactional
+	public void delete(Long id) {
+		repository.deleteById(id);
+	}
 
 	private void copyToEntity(User user, User entity) {
 		entity.setName(user.getName());
