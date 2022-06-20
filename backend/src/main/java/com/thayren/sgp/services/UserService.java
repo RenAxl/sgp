@@ -6,6 +6,7 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.thayren.sgp.entities.User;
 import com.thayren.sgp.repositories.UserRepository;
@@ -27,6 +28,22 @@ public class UserService {
 		Optional<User> obj = repository.findById(id);
 		User entity = obj.get();
 		return entity;
+	}
+	
+	@Transactional
+	public User insert(User user) {
+		User entity = new User();
+		copyToEntity(user, entity);	
+		entity = repository.save(entity);
+		
+		return entity;
+	}
+
+	private void copyToEntity(User user, User entity) {
+		entity.setName(user.getName());
+		entity.setEmail(user.getEmail());
+		entity.setPassword(user.getPassword());
+		
 	}
 	
 }
