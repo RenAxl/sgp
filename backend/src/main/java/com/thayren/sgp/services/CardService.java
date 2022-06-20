@@ -29,7 +29,28 @@ public class CardService {
 	public Card findById(Long id) {
 		Optional<Card> obj = repository.findById(id);
 		Card entity = obj.get();
+		
 		return entity;
+	}
+	
+	@Transactional
+	public Card insert(Card card) {
+		Card entity = new Card();
+		copyToEntity(card, entity);	
+		entity = repository.save(entity);
+		
+		return entity;
+	}
+
+	private void copyToEntity(Card card, Card entity) {
+		entity.setModel(card.getModel());
+		entity.setFeature(card.getFeature());
+		entity.setFunctionality(card.getFunctionality());
+		entity.setConnection(card.getConnection());
+		entity.setResetProcedure(card.getResetProcedure());
+		entity.setExchangeProcedure(card.getExchangeProcedure());
+		entity.setImgUrl(card.getImgUrl());
+		
 	}
 	
 
