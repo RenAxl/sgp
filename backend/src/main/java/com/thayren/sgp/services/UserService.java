@@ -38,6 +38,15 @@ public class UserService {
 		
 		return entity;
 	}
+	
+	@Transactional
+	public User update(Long id, User user) {
+		User entity = repository.getOne(id);
+		copyToEntity(user, entity);	
+		entity = repository.save(entity);
+		
+		return entity;
+	}
 
 	private void copyToEntity(User user, User entity) {
 		entity.setName(user.getName());
