@@ -50,6 +50,12 @@ public class CardService {
 		
 		return entity;
 	}
+	
+	public void delete(Long id) {
+		repository.deleteById(id);
+	}
+	
+	
 
 	private void copyToEntity(Card card, Card entity) {
 		entity.setModel(card.getModel());
