@@ -41,6 +41,15 @@ public class CardService {
 		
 		return entity;
 	}
+	
+	@Transactional
+	public Card update(Long id, Card card) {
+		Card entity = repository.getOne(id);
+		copyToEntity(card, entity);	
+		entity = repository.save(entity);
+		
+		return entity;
+	}
 
 	private void copyToEntity(Card card, Card entity) {
 		entity.setModel(card.getModel());
