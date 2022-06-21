@@ -76,7 +76,9 @@ INSERT INTO tb_card_equipment (card_id, equipment_id) VALUES (28, 7);
 INSERT INTO tb_card_equipment (card_id, equipment_id) VALUES (29, 6);
 INSERT INTO tb_card_equipment (card_id, equipment_id) VALUES (30, 8);
 
-
+INSERT INTO tb_user_role (user_id, role_id) VALUES (1, 1);
+INSERT INTO tb_user_role (user_id, role_id) VALUES (2, 1);
+INSERT INTO tb_user_role (user_id, role_id) VALUES (2, 2);
 
 
 
