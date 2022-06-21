@@ -1,11 +1,16 @@
 package com.thayren.sgp.entities;
 
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -24,6 +29,13 @@ public class Card implements Serializable {
 	private String resetProcedure;
 	private String exchangeProcedure;
 	private String imgUrl;
+	
+	@ManyToMany
+	@JoinTable(
+			name = "tb_card_equipment",
+			joinColumns = @JoinColumn(name = "card_id"),
+			inverseJoinColumns =  @JoinColumn(name = "equipment_id"))
+	Set<Equipment> equipments = new HashSet<>();
 	
 	public Card() {
 	}
@@ -102,6 +114,10 @@ public class Card implements Serializable {
 
 	public void setExchangeProcedure(String exchangeProcedure) {
 		this.exchangeProcedure = exchangeProcedure;
+	}
+	
+	public Set<Equipment> getEquipments() {
+		return equipments;
 	}
 
 	@Override

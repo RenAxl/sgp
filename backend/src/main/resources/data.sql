@@ -1,4 +1,5 @@
 INSERT INTO tb_equipment (model) VALUES ('Alcatel 1662');
+INSERT INTO tb_equipment (model) VALUES ('Alcatel 1660');
 INSERT INTO tb_equipment (model) VALUES ('Lucent ADMU');
 INSERT INTO tb_equipment (model) VALUES ('Marconi 1664');
 INSERT INTO tb_equipment (model) VALUES ('Nokia 1830');
@@ -43,5 +44,39 @@ INSERT INTO tb_user (name, email, password) VALUES ('Rose', 'rose@gmail.com', '$
 
 INSERT INTO tb_role (authority) VALUES ('ROLE_OPERATOR');
 INSERT INTO tb_role (authority) VALUES ('ROLE_ADMIN');
+
+INSERT INTO tb_card_equipment (card_id, equipment_id) VALUES (1, 2);
+INSERT INTO tb_card_equipment (card_id, equipment_id) VALUES (2, 6);
+INSERT INTO tb_card_equipment (card_id, equipment_id) VALUES (3, 6);
+INSERT INTO tb_card_equipment (card_id, equipment_id) VALUES (4, 6);
+INSERT INTO tb_card_equipment (card_id, equipment_id) VALUES (5, 5);
+INSERT INTO tb_card_equipment (card_id, equipment_id) VALUES (6, 5);
+INSERT INTO tb_card_equipment (card_id, equipment_id) VALUES (7, 1);
+INSERT INTO tb_card_equipment (card_id, equipment_id) VALUES (8, 5);
+INSERT INTO tb_card_equipment (card_id, equipment_id) VALUES (9, 5);
+INSERT INTO tb_card_equipment (card_id, equipment_id) VALUES (10, 5);
+INSERT INTO tb_card_equipment (card_id, equipment_id) VALUES (11, 6);
+INSERT INTO tb_card_equipment (card_id, equipment_id) VALUES (12, 5);
+INSERT INTO tb_card_equipment (card_id, equipment_id) VALUES (13, 3);
+INSERT INTO tb_card_equipment (card_id, equipment_id) VALUES (14, 8);
+INSERT INTO tb_card_equipment (card_id, equipment_id) VALUES (15, 8);
+INSERT INTO tb_card_equipment (card_id, equipment_id) VALUES (16, 8);
+INSERT INTO tb_card_equipment (card_id, equipment_id) VALUES (17, 8);
+INSERT INTO tb_card_equipment (card_id, equipment_id) VALUES (18, 5);
+INSERT INTO tb_card_equipment (card_id, equipment_id) VALUES (19, 1);
+INSERT INTO tb_card_equipment (card_id, equipment_id) VALUES (20, 5);
+INSERT INTO tb_card_equipment (card_id, equipment_id) VALUES (21, 5);
+INSERT INTO tb_card_equipment (card_id, equipment_id) VALUES (22, 5);
+INSERT INTO tb_card_equipment (card_id, equipment_id) VALUES (23, 7);
+INSERT INTO tb_card_equipment (card_id, equipment_id) VALUES (24, 5);
+INSERT INTO tb_card_equipment (card_id, equipment_id) VALUES (25, 1);
+INSERT INTO tb_card_equipment (card_id, equipment_id) VALUES (26, 7);
+INSERT INTO tb_card_equipment (card_id, equipment_id) VALUES (27, 7);
+INSERT INTO tb_card_equipment (card_id, equipment_id) VALUES (28, 7);
+INSERT INTO tb_card_equipment (card_id, equipment_id) VALUES (29, 6);
+INSERT INTO tb_card_equipment (card_id, equipment_id) VALUES (30, 8);
+
+
+
 
 

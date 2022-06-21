@@ -1,11 +1,14 @@
 package com.thayren.sgp.entities;
 
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -17,6 +20,9 @@ public class Equipment implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	private String model;
+	
+	@ManyToMany(mappedBy ="equipments" )
+	private Set<Card> cards = new HashSet<>();
 
 	public Equipment() {
 	}
@@ -40,6 +46,10 @@ public class Equipment implements Serializable {
 
 	public void setModel(String model) {
 		this.model = model;
+	}
+	
+	public Set<Card> getCards() {
+		return cards;
 	}
 
 	@Override
