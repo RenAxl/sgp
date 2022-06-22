@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import com.thayren.sgp.entities.Card;
+import com.thayren.sgp.dto.CardDTO;
 import com.thayren.sgp.services.CardService;
 
 @RestController
@@ -27,36 +27,36 @@ public class CardResource {
 	private CardService service;
 	
 	@GetMapping
-	public ResponseEntity<List<Card>> findAll(){
+	public ResponseEntity<List<CardDTO>> findAll(){
 		
-		List<Card> list = new ArrayList<>();
+		List<CardDTO> list = new ArrayList<>();
 		list = service.findAll();
 		
 		return ResponseEntity.ok().body(list);
 	}
 	
 	@GetMapping(value = "/{id}")
-	public ResponseEntity<Card> findById(@PathVariable Long id){
-		Card card = service.findById(id);
-		return ResponseEntity.ok().body(card);
+	public ResponseEntity<CardDTO> findById(@PathVariable Long id){
+		CardDTO cardDto = service.findById(id);
+		return ResponseEntity.ok().body(cardDto);
 	}
 	
 	@PostMapping
-	public ResponseEntity<Card> insert(@RequestBody Card card){
-		card = service.insert(card);
+	public ResponseEntity<CardDTO> insert(@RequestBody CardDTO cardDto){
+		cardDto = service.insert(cardDto);
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
-				.buildAndExpand(card.getId()).toUri();
-		return ResponseEntity.created(uri).body(card);
+				.buildAndExpand(cardDto.getId()).toUri();
+		return ResponseEntity.created(uri).body(cardDto);
 	}
 	
 	@PutMapping(value = "/{id}")
-	public ResponseEntity<Card> update(@PathVariable Long id, @RequestBody Card card){
-		card = service.update(id, card);
-		return ResponseEntity.ok().body(card);
+	public ResponseEntity<CardDTO> update(@PathVariable Long id, @RequestBody CardDTO cardDto){
+		cardDto = service.update(id, cardDto);
+		return ResponseEntity.ok().body(cardDto);
 	}
 	
 	@DeleteMapping(value = "/{id}")
-	public ResponseEntity<Card> delete(@PathVariable Long id){
+	public ResponseEntity<CardDTO> delete(@PathVariable Long id){
 		service.delete(id);
 		return ResponseEntity.noContent().build();
 	}

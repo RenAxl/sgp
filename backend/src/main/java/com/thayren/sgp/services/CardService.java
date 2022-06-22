@@ -3,13 +3,18 @@ package com.thayren.sgp.services;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.thayren.sgp.dto.CardDTO;
+import com.thayren.sgp.dto.EquipmentDTO;
 import com.thayren.sgp.entities.Card;
+import com.thayren.sgp.entities.Equipment;
 import com.thayren.sgp.repositories.CardRepository;
+import com.thayren.sgp.repositories.EquipmentRepository;
 
 @Service
 public class CardService {
@@ -17,38 +22,43 @@ public class CardService {
 	@Autowired
 	private CardRepository repository;	
 	
+	@Autowired
+	private EquipmentRepository equipmentRepository;
+	
 	@Transactional(readOnly = true)
-	public List<Card> findAll() {
+	public List<CardDTO> findAll() {
 		List<Card> list = new ArrayList<>();
 		list = repository.findAll();
+		
+		List<CardDTO> listDto = list.stream().map(x -> new CardDTO(x, x.getEquipments())).collect(Collectors.toList());
 
-		return list;
+		return listDto;
 	}
 	
 	@Transactional(readOnly = true)
-	public Card findById(Long id) {
+	public CardDTO findById(Long id) {
 		Optional<Card> obj = repository.findById(id);
 		Card entity = obj.get();
 		
-		return entity;
+		return new CardDTO(entity, entity.getEquipments());
 	}
 	
 	@Transactional
-	public Card insert(Card card) {
+	public CardDTO insert(CardDTO cardDto) {
 		Card entity = new Card();
-		copyToEntity(card, entity);	
+		copyDtoToEntity(cardDto, entity);	
 		entity = repository.save(entity);
 		
-		return entity;
+		return new CardDTO(entity, entity.getEquipments());
 	}
 	
 	@Transactional
-	public Card update(Long id, Card card) {
+	public CardDTO update(Long id, CardDTO cardDto) {
 		Card entity = repository.getOne(id);
-		copyToEntity(card, entity);	
+		copyDtoToEntity(cardDto, entity);	
 		entity = repository.save(entity);
 		
-		return entity;
+		return new CardDTO(entity, entity.getEquipments());
 	}
 	
 	public void delete(Long id) {
@@ -57,14 +67,19 @@ public class CardService {
 	
 	
 
-	private void copyToEntity(Card card, Card entity) {
-		entity.setModel(card.getModel());
-		entity.setFeature(card.getFeature());
-		entity.setFunctionality(card.getFunctionality());
-		entity.setConnection(card.getConnection());
-		entity.setResetProcedure(card.getResetProcedure());
-		entity.setExchangeProcedure(card.getExchangeProcedure());
-		entity.setImgUrl(card.getImgUrl());
+	private void copyDtoToEntity(CardDTO cardDto, Card entity) {
+		entity.setModel(cardDto.getModel());
+		entity.setFeature(cardDto.getFeature());
+		entity.setFunctionality(cardDto.getFunctionality());
+		entity.setConnection(cardDto.getConnection());
+		entity.setResetProcedure(cardDto.getResetProcedure());
+		entity.setExchangeProcedure(cardDto.getExchangeProcedure());
+		entity.setImgUrl(cardDto.getImgUrl());
+		
+		for(EquipmentDTO equipmentDto : cardDto.getEquipments()) {
+			Equipment equipment = equipmentRepository.getOne(equipmentDto.getId());
+			entity.getEquipments().add(equipment);
+		}
 		
 	}
 	
