@@ -61,6 +61,7 @@ public class CardService {
 		return new CardDTO(entity, entity.getEquipments());
 	}
 	
+	@Transactional
 	public void delete(Long id) {
 		repository.deleteById(id);
 	}
@@ -75,6 +76,8 @@ public class CardService {
 		entity.setResetProcedure(cardDto.getResetProcedure());
 		entity.setExchangeProcedure(cardDto.getExchangeProcedure());
 		entity.setImgUrl(cardDto.getImgUrl());
+		
+		entity.getEquipments().clear();
 		
 		for(EquipmentDTO equipmentDto : cardDto.getEquipments()) {
 			Equipment equipment = equipmentRepository.getOne(equipmentDto.getId());
