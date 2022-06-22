@@ -1,13 +1,14 @@
 package com.thayren.sgp.services;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.thayren.sgp.dto.EquipmentDTO;
 import com.thayren.sgp.entities.Equipment;
 import com.thayren.sgp.repositories.EquipmentRepository;
 
@@ -18,37 +19,42 @@ public class EquipmentService {
 	private EquipmentRepository repository;
 	
 	@Transactional(readOnly = true)
-	public List<Equipment> findAll() {
-		List<Equipment> list = new ArrayList<>();
+	public List<EquipmentDTO> findAll() {
+		List<Equipment> list = repository.findAll();
 		list = repository.findAll();
 		
-		return list;
+		List<EquipmentDTO> listDto = list.stream().map(x -> new EquipmentDTO(x)).collect(Collectors.toList());
+		
+		return listDto;
 	}
 	
 	@Transactional(readOnly = true)
-	public Equipment findById(Long id) {
+	public EquipmentDTO findById(Long id) {
 		Optional<Equipment> obj = repository.findById(id);
 		Equipment entity = obj.get();
 		
-		return entity;
+		return new EquipmentDTO(entity);
 	}
 	
 	@Transactional
-	public Equipment insert(Equipment equipment) {
+	public EquipmentDTO insert(EquipmentDTO equipmentDto) {
 		Equipment entity = new Equipment();
-		entity.setModel(equipment.getModel());
+		entity.setModel(equipmentDto.getModel());
 		entity = repository.save(entity);
-		return entity;
+		
+		return new EquipmentDTO(entity) ;
 	}
 	
 	@Transactional
-	public Equipment update(Long id, Equipment equipment) {
+	public EquipmentDTO update(Long id, EquipmentDTO equipmentDto) {
 		Equipment entity = repository.getOne(id);
-		entity.setModel(equipment.getModel());
+		entity.setModel(equipmentDto.getModel());
 		entity = repository.save(entity);
-		return entity;
+		
+		return new EquipmentDTO(entity);
 	}
 	
+	@Transactional
 	public void delete(Long id) {
 		repository.deleteById(id);
 	}

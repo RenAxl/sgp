@@ -17,6 +17,7 @@ public class UserService {
 	@Autowired
 	private UserRepository repository;
 
+	@Transactional(readOnly = true)
 	public List<User> findAll() {
 		List<User> list = new ArrayList<>();
 		list = repository.findAll();
@@ -24,6 +25,7 @@ public class UserService {
 		return list;
 	}
 	
+	@Transactional(readOnly = true)
 	public User findById(Long id) {
 		Optional<User> obj = repository.findById(id);
 		User entity = obj.get();

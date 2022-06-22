@@ -1,4 +1,4 @@
-package com.thayren.sgp.services;
+package com.thayren.sgp.resources;
 
 import java.net.URI;
 import java.util.ArrayList;
@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.thayren.sgp.entities.User;
+import com.thayren.sgp.services.UserService;
 
 @RestController
 @RequestMapping(value = "/users")

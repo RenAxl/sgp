@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import com.thayren.sgp.entities.Equipment;
+import com.thayren.sgp.dto.EquipmentDTO;
 import com.thayren.sgp.services.EquipmentService;
 
 @RestController
@@ -27,37 +27,37 @@ public class EquipmentResource {
 	private EquipmentService service;
 	
 	@GetMapping
-	public ResponseEntity<List<Equipment>> findAll(){
+	public ResponseEntity<List<EquipmentDTO>> findAll(){
 		
-		List<Equipment> list = new ArrayList<>();
+		List<EquipmentDTO> list = new ArrayList<>();
 		list = service.findAll();
 		
 		return ResponseEntity.ok().body(list);
 	}
 	
 	@GetMapping(value = "/{id}")
-	public ResponseEntity<Equipment> findById(@PathVariable Long id){
-		Equipment equipment = service.findById(id);
+	public ResponseEntity<EquipmentDTO> findById(@PathVariable Long id){
+		EquipmentDTO equipmentDto = service.findById(id);
 		
-		return ResponseEntity.ok().body(equipment);
+		return ResponseEntity.ok().body(equipmentDto);
 	}
 	
 	@PostMapping
-	public ResponseEntity<Equipment> insert(@RequestBody Equipment equipment){
-		equipment = service.insert(equipment);
+	public ResponseEntity<EquipmentDTO> insert(@RequestBody EquipmentDTO equipmentDto){
+		equipmentDto = service.insert(equipmentDto);
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
-				.buildAndExpand(equipment.getId()).toUri();
-		return ResponseEntity.created(uri).body(equipment);
+				.buildAndExpand(equipmentDto.getId()).toUri();
+		return ResponseEntity.created(uri).body(equipmentDto);
 	}
 	
 	@PutMapping(value = "/{id}")
-	public ResponseEntity<Equipment> update(@PathVariable Long id, @RequestBody Equipment equipment){
-		equipment = service.update(id, equipment);
-		return ResponseEntity.ok().body(equipment);
+	public ResponseEntity<EquipmentDTO> update(@PathVariable Long id, @RequestBody EquipmentDTO equipmentDto){
+		equipmentDto = service.update(id, equipmentDto);
+		return ResponseEntity.ok().body(equipmentDto);
 	}
 	
 	@DeleteMapping(value = "/{id}")
-	public ResponseEntity<Equipment> delete(@PathVariable Long id){
+	public ResponseEntity<EquipmentDTO> delete(@PathVariable Long id){
 		service.delete(id);
 		return ResponseEntity.noContent().build();
 	}
