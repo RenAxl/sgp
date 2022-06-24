@@ -1,5 +1,7 @@
 package com.thayren.sgp.services;
 
+import java.util.Arrays;
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,9 +27,10 @@ public class CardService {
 	private EquipmentRepository equipmentRepository;
 	
 	@Transactional(readOnly = true)
-	public Page<CardDTO> findAllPaged(PageRequest pageRequest) {
-		Page<Card> list = repository.findAll(pageRequest);
-		Page<CardDTO> listDto = list.map(x -> new CardDTO(x));
+	public Page<CardDTO> findAllPaged(Long equipmentId, String model, PageRequest pageRequest) {
+		List<Equipment> equipments = (equipmentId == 0L) ? null : Arrays.asList(equipmentRepository.getOne(equipmentId));
+		Page<Card> list = repository.find(equipments, model, pageRequest);
+		Page<CardDTO> listDto = list.map(x -> new CardDTO(x, x.getEquipments()));
 
 		return listDto;
 	}

@@ -30,6 +30,8 @@ public class CardResource {
 	
 	@GetMapping
 	public ResponseEntity<Page<CardDTO>> findAllPaged(
+			@RequestParam(value = "equipmentId", defaultValue = "0") Long equipmentId,
+			@RequestParam(value = "model", defaultValue = "") String model,
 			@RequestParam(value = "page", defaultValue = "0") Integer page,
 			@RequestParam(value = "linesPerPage", defaultValue = "12") Integer linesPerPage,
 			@RequestParam(value = "direction", defaultValue = "ASC") String direction,
@@ -38,7 +40,7 @@ public class CardResource {
 		
 		PageRequest pageRequest = PageRequest.of(page, linesPerPage, Direction.valueOf(direction), orderBy);
 		
-		Page<CardDTO> list = service.findAllPaged(pageRequest);
+		Page<CardDTO> list = service.findAllPaged(equipmentId, model.trim(), pageRequest);
 		
 		return ResponseEntity.ok().body(list);
 	}
