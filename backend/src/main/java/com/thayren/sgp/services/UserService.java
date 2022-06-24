@@ -24,13 +24,13 @@ public class UserService {
 
 	@Autowired
 	private RoleRepository roleRepository;
-	
+
 	@Autowired
 	private BCryptPasswordEncoder passwordEncoder;
 
 	@Transactional(readOnly = true)
-	public Page<UserDTO> findAllPaged(PageRequest pageRequest) {
-		Page<User> list = repository.findAll(pageRequest);
+	public Page<UserDTO> findAllPaged(String name, PageRequest pageRequest) {
+		Page<User> list = repository.find(name, pageRequest);
 		Page<UserDTO> listDto = list.map(x -> new UserDTO(x));
 
 		return listDto;
@@ -40,7 +40,7 @@ public class UserService {
 	public UserDTO findById(Long id) {
 		Optional<User> obj = repository.findById(id);
 		User entity = obj.get();
-		
+
 		return new UserDTO(entity);
 	}
 
