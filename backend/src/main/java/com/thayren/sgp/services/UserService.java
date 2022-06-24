@@ -31,6 +31,7 @@ public class UserService {
 	@Transactional(readOnly = true)
 	public Page<UserDTO> findAllPaged(String name, PageRequest pageRequest) {
 		Page<User> list = repository.find(name, pageRequest);
+		repository.findUsersWithRoles(list.getContent());
 		Page<UserDTO> listDto = list.map(x -> new UserDTO(x));
 
 		return listDto;
