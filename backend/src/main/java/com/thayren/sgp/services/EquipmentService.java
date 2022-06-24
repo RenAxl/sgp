@@ -19,8 +19,8 @@ public class EquipmentService {
 	private EquipmentRepository repository;
 
 	@Transactional(readOnly = true)
-	public Page<EquipmentDTO> findAllPaged(PageRequest pageRequest) {
-		Page<Equipment> list = repository.findAll(pageRequest);
+	public Page<EquipmentDTO> findAllPaged(String model, PageRequest pageRequest) {
+		Page<Equipment> list = repository.find(model, pageRequest);
 		Page<EquipmentDTO> listDto = list.map(x -> new EquipmentDTO(x));
 
 		return listDto;

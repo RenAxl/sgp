@@ -30,6 +30,7 @@ public class EquipmentResource {
 	
 	@GetMapping
 	public ResponseEntity<Page<EquipmentDTO>> findAllPaged(
+			@RequestParam(value = "model", defaultValue = "") String model,
 			@RequestParam(value = "page", defaultValue = "0") Integer page,
 			@RequestParam(value = "linesPerPage", defaultValue = "12") Integer linesPerPage,
 			@RequestParam(value = "direction", defaultValue = "ASC") String direction,
@@ -38,7 +39,7 @@ public class EquipmentResource {
 		
 		PageRequest pageRequest = PageRequest.of(page, linesPerPage, Direction.valueOf(direction), orderBy);
 		
-		Page<EquipmentDTO> list = service.findAllPaged(pageRequest);
+		Page<EquipmentDTO> list = service.findAllPaged(model.trim(), pageRequest);
 		
 		return ResponseEntity.ok().body(list);
 	}
