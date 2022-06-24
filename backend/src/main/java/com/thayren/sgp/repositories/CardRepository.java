@@ -18,5 +18,8 @@ public interface CardRepository extends JpaRepository<Card, Long> {
 			+ "(COALESCE(:equipments) IS NULL OR eqts IN :equipments) AND "
 			+ "(LOWER(obj.model) LIKE LOWER(CONCAT('%',:model,'%'))) ")
 	Page<Card> find(List<Equipment> equipments, String model, Pageable pageable);
+	
+	@Query("SELECT obj FROM Card obj JOIN FETCH obj.equipments WHERE obj IN :cards")
+	List<Card> findCardsWithEquipments(List<Card> cards);
 
 }

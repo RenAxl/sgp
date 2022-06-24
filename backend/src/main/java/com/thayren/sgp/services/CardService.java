@@ -30,6 +30,7 @@ public class CardService {
 	public Page<CardDTO> findAllPaged(Long equipmentId, String model, PageRequest pageRequest) {
 		List<Equipment> equipments = (equipmentId == 0L) ? null : Arrays.asList(equipmentRepository.getOne(equipmentId));
 		Page<Card> list = repository.find(equipments, model, pageRequest);
+		repository.findCardsWithEquipments(list.getContent());
 		Page<CardDTO> listDto = list.map(x -> new CardDTO(x, x.getEquipments()));
 
 		return listDto;
