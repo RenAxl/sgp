@@ -62,7 +62,7 @@ public class EquipmentService {
 		}
 	}
 
-	@Transactional
+	
 	public void delete(Long id) {
 		try {
 			repository.deleteById(id);

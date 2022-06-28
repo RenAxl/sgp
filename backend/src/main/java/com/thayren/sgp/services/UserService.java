@@ -63,7 +63,7 @@ public class UserService {
 		return new UserDTO(entity);
 	}
 
-	@Transactional
+	
 	public void delete(Long id) {
 		repository.deleteById(id);
 	}
