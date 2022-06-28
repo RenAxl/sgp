@@ -2,7 +2,10 @@ package com.thayren.sgp.services;
 
 import java.util.Optional;
 
+import javax.persistence.EntityNotFoundException;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -15,6 +18,7 @@ import com.thayren.sgp.entities.Role;
 import com.thayren.sgp.entities.User;
 import com.thayren.sgp.repositories.RoleRepository;
 import com.thayren.sgp.repositories.UserRepository;
+import com.thayren.sgp.services.exceptions.ResourceNotFoundException;
 
 @Service
 public class UserService {
@@ -40,7 +44,7 @@ public class UserService {
 	@Transactional(readOnly = true)
 	public UserDTO findById(Long id) {
 		Optional<User> obj = repository.findById(id);
-		User entity = obj.get();
+		User entity = obj.orElseThrow(() -> new ResourceNotFoundException("Entity not found"));
 
 		return new UserDTO(entity);
 	}
@@ -56,16 +60,23 @@ public class UserService {
 
 	@Transactional
 	public UserDTO update(Long id, UserDTO userDto) {
-		User entity = repository.getOne(id);
-		copyDtoToEntity(userDto, entity);
-		entity = repository.save(entity);
+		try {
+			User entity = repository.getOne(id);
+			copyDtoToEntity(userDto, entity);
+			entity = repository.save(entity);
 
-		return new UserDTO(entity);
+			return new UserDTO(entity);
+		} catch (EntityNotFoundException e) {
+			throw new ResourceNotFoundException("Id not found " + id);
+		}
 	}
 
-	
 	public void delete(Long id) {
-		repository.deleteById(id);
+		try {
+			repository.deleteById(id);
+		} catch (EmptyResultDataAccessException e) {
+			throw new ResourceNotFoundException("Id not found " + id);
+		}
 	}
 
 	private void copyDtoToEntity(UserDTO userDto, User entity) {
