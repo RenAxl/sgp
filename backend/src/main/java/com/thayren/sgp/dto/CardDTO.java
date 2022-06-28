@@ -4,6 +4,9 @@ import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
+
 import com.thayren.sgp.entities.Card;
 import com.thayren.sgp.entities.Equipment;
 
@@ -11,12 +14,27 @@ public class CardDTO implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	private Long id;
+	
+	@Size(min = 5, max = 60, message ="O nome deve ter entre 5 a 60 caracteres")
+	@NotBlank(message = "Campo requerido")
 	private String model;
+	
+	@NotBlank(message = "Campo requerido")
 	private String feature;
+	
+	@NotBlank(message = "Campo requerido")
 	private String functionality;
+	
+	@NotBlank(message = "Campo requerido")
 	private String connection;
+	
+	@NotBlank(message = "Campo requerido")
 	private String resetProcedure;
+	
+	@NotBlank(message = "Campo requerido")
 	private String exchangeProcedure;
+	
+	@NotBlank(message = "Campo requerido")
 	private String imgUrl;
 	
 	private Set<EquipmentDTO> equipments = new HashSet<>();;

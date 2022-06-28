@@ -2,6 +2,8 @@ package com.thayren.sgp.resources;
 
 import java.net.URI;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -52,7 +54,7 @@ public class CardResource {
 	}
 	
 	@PostMapping
-	public ResponseEntity<CardDTO> insert(@RequestBody CardDTO cardDto){
+	public ResponseEntity<CardDTO> insert(@Valid @RequestBody CardDTO cardDto){
 		cardDto = service.insert(cardDto);
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
 				.buildAndExpand(cardDto.getId()).toUri();
@@ -60,7 +62,7 @@ public class CardResource {
 	}
 	
 	@PutMapping(value = "/{id}")
-	public ResponseEntity<CardDTO> update(@PathVariable Long id, @RequestBody CardDTO cardDto){
+	public ResponseEntity<CardDTO> update(@PathVariable Long id, @Valid @RequestBody CardDTO cardDto){
 		cardDto = service.update(id, cardDto);
 		return ResponseEntity.ok().body(cardDto);
 	}
