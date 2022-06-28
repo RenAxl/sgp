@@ -2,6 +2,8 @@ package com.thayren.sgp.resources;
 
 import java.net.URI;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -52,7 +54,7 @@ public class EquipmentResource {
 	}
 	
 	@PostMapping
-	public ResponseEntity<EquipmentDTO> insert(@RequestBody EquipmentDTO equipmentDto){
+	public ResponseEntity<EquipmentDTO> insert(@Valid @RequestBody EquipmentDTO equipmentDto){
 		equipmentDto = service.insert(equipmentDto);
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
 				.buildAndExpand(equipmentDto.getId()).toUri();
@@ -60,7 +62,7 @@ public class EquipmentResource {
 	}
 	
 	@PutMapping(value = "/{id}")
-	public ResponseEntity<EquipmentDTO> update(@PathVariable Long id, @RequestBody EquipmentDTO equipmentDto){
+	public ResponseEntity<EquipmentDTO> update(@PathVariable Long id, @Valid @RequestBody EquipmentDTO equipmentDto){
 		equipmentDto = service.update(id, equipmentDto);
 		return ResponseEntity.ok().body(equipmentDto);
 	}

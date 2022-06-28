@@ -2,12 +2,18 @@ package com.thayren.sgp.dto;
 
 import java.io.Serializable;
 
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
+
 import com.thayren.sgp.entities.Equipment;
 
 public class EquipmentDTO implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	private Long id;
+	
+	@Size(min = 5, max = 60, message ="O modelo deve ter entre 5 a 60 caracteres")
+	@NotBlank(message = "Campo requerido")
 	private String model;
 
 	public EquipmentDTO() {
