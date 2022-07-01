@@ -14,6 +14,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.thayren.sgp.dto.RoleDTO;
 import com.thayren.sgp.dto.UserDTO;
+import com.thayren.sgp.dto.UserInsertDTO;
+import com.thayren.sgp.dto.UserUpdateDTO;
 import com.thayren.sgp.entities.Role;
 import com.thayren.sgp.entities.User;
 import com.thayren.sgp.repositories.RoleRepository;
@@ -50,19 +52,19 @@ public class UserService {
 	}
 
 	@Transactional
-	public UserDTO insert(UserDTO userDto) {
+	public UserDTO insert(UserInsertDTO dto) {
 		User entity = new User();
-		copyDtoToEntity(userDto, entity);
+		copyDtoInsertToEntity(dto, entity);
 		entity = repository.save(entity);
 
 		return new UserDTO(entity);
 	}
 
 	@Transactional
-	public UserDTO update(Long id, UserDTO userDto) {
+	public UserDTO update(Long id, UserUpdateDTO dto) {
 		try {
 			User entity = repository.getOne(id);
-			copyDtoToEntity(userDto, entity);
+			copyDtoUpdateToEntity(dto, entity);
 			entity = repository.save(entity);
 
 			return new UserDTO(entity);
@@ -79,18 +81,29 @@ public class UserService {
 		}
 	}
 
-	private void copyDtoToEntity(UserDTO userDto, User entity) {
-		entity.setName(userDto.getName());
-		entity.setEmail(userDto.getEmail());
-		entity.setPassword(passwordEncoder.encode(userDto.getPassword()));
+	private void copyDtoInsertToEntity(UserInsertDTO dto, User entity) {
+		entity.setName(dto.getName());
+		entity.setEmail(dto.getEmail());
+		entity.setPassword(passwordEncoder.encode(dto.getPassword()));
 
 		entity.getRoles().clear();
 
-		for (RoleDTO roleDto : userDto.getRoles()) {
+		for (RoleDTO roleDto : dto.getRoles()) {
 			Role role = roleRepository.getOne(roleDto.getId());
 			entity.getRoles().add(role);
 		}
+	}
+	
+	private void copyDtoUpdateToEntity(UserUpdateDTO dto, User entity) {
+		entity.setName(dto.getName());
+		entity.setEmail(dto.getEmail());
+		
+		entity.getRoles().clear();
 
+		for (RoleDTO roleDto : dto.getRoles()) {
+			Role role = roleRepository.getOne(roleDto.getId());
+			entity.getRoles().add(role);
+		}
 	}
 
 }
