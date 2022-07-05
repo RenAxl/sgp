@@ -1,10 +1,12 @@
 import { BrowserRouter, Switch, Route } from "react-router-dom";
+import Home from "pages/Home";
+
 
 const Routes = () => (
   <BrowserRouter>
     <Switch>
-    <Route path="/" exact>
-        <h1>Hello SGP!</h1>
+      <Route path="/" exact>
+        <Home />
       </Route>
     </Switch>
   </BrowserRouter>
