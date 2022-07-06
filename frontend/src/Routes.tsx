@@ -3,6 +3,7 @@ import Home from "pages/Home";
 import Navbar from "components/Navbar";
 import Boards from "pages/Boards";
 import BoardInformations from "pages/BoardInformations";
+import Admin from "pages/Admin";
 
 const Routes = () => (
   <BrowserRouter>
@@ -16,6 +17,9 @@ const Routes = () => (
       </Route>
       <Route path="/boards/:boardId">
         <BoardInformations />
+      </Route>
+      <Route path="/admin">
+        <Admin />
       </Route>
     </Switch>
   </BrowserRouter>
