@@ -22,37 +22,37 @@ const Boards = () => {
           </Link>
         </div>
         <div className="col-sm-6 col-lg-4 col-xl-3">
-          <Link to="/boards/1">
+          <Link to="/boards/2">
             <BoardCard />
           </Link>
         </div>
         <div className="col-sm-6 col-lg-4 col-xl-3">
-          <Link to="/boards/1">
+          <Link to="/boards/3">
             <BoardCard />
           </Link>
         </div>
         <div className="col-sm-6 col-lg-4 col-xl-3">
-          <Link to="/boards/1">
+          <Link to="/boards/4">
             <BoardCard />
           </Link>
         </div>
         <div className="col-sm-6 col-lg-4 col-xl-3">
-          <Link to="/boards/1">
+          <Link to="/boards/5">
             <BoardCard />
           </Link>
         </div>
         <div className="col-sm-6 col-lg-4 col-xl-3">
-          <Link to="/boards/1">
+          <Link to="/boards/6">
             <BoardCard />
           </Link>
         </div>
         <div className="col-sm-6 col-lg-4 col-xl-3">
-          <Link to="/boards/1">
+          <Link to="/boards/7">
             <BoardCard />
           </Link>
         </div>
         <div className="col-sm-6 col-lg-4 col-xl-3">
-          <Link to="/boards/1">
+          <Link to="/boards/8">
             <BoardCard />
           </Link>
         </div>
