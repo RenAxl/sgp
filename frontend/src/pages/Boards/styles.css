@@ -1,0 +1,23 @@
+.boards-container {
+  font-size: 18px;
+}
+
+.boards-title-container {
+  margin-bottom: 20px;
+}
+
+.boards-title-container h1 {
+  font-size: 1em;
+  letter-spacing: -0.015em;
+  color: #263238;
+}
+
+@media (min-width: 576px) {
+  .boards-container {
+    font-size: 30px;
+  }
+
+  .boards-filter {
+    margin-left: -20px;
+  }
+}

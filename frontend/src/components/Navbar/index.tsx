@@ -31,7 +31,7 @@ const Navbar = () => {
               </NavLink>
             </li>
             <li>
-              <NavLink to="/cards" activeClassName="active">
+              <NavLink to="/boards" activeClassName="active">
                 PLACAS
               </NavLink>
             </li>
