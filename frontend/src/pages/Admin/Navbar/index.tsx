@@ -7,7 +7,7 @@ const Navbar = () => {
     <nav className="admin-nav-container">
       <ul className="admin-nav-items-container">
         <li>
-          <NavLink to="/admin/cards" className="admin-nav-item">
+          <NavLink to="/admin/boards" className="admin-nav-item">
             <p>Gerenciar Placas</p>
           </NavLink>
         </li>

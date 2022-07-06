@@ -23,7 +23,7 @@ const BoardInformations = () => {
             <div className="model-equipment-container">
               <h1>Transponder 100g Padtec</h1>
               <div className="equipments-container">
-                  <Badge name="Equipamento Alcatel 1660" key={1} />
+                  <Badge name="Equipamento Padtec L6400" key={1} />
               </div>
             </div>
           </div>
