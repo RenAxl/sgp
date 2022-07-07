@@ -4,6 +4,7 @@ import EquipmentCrud from "./EquipmentCrud";
 import Navbar from "./Navbar";
 
 import "./styles.css";
+import UserCrud from "./UserCrud";
 
 const Admin = () => (
   <div className="admin-container">
@@ -15,6 +16,9 @@ const Admin = () => (
         </Route>
         <Route path="/admin/boards">
           <BoardCrud />
+        </Route>
+        <Route path="/admin/users">
+          <UserCrud />
         </Route>
       </Switch>
     </div>
