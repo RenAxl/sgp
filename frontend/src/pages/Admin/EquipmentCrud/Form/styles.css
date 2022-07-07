@@ -1,0 +1,69 @@
+.equipment-crud-form-card {
+    padding: 20px;
+  }
+  
+  .equipment-crud-form-title {
+    font-weight: bold;
+    font-size: 22px;
+    letter-spacing: -0.015em;
+    color: #263238;
+    margin-bottom: 30px;
+  }
+  
+  .margin-bottom-30 {
+    margin-bottom: 30px;
+  }
+  
+  .equipment-crud-inputs-container {
+    margin-bottom: 30px;
+  }
+  
+  .equipment-crud-inputs-left-container {
+    margin-bottom: 30px;
+  }
+  
+  .equipment-crud-buttons-container {
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .equipment-crud-button {
+    height: 50px;
+    width: 110px;
+    border-radius: 10px;
+    font-weight: bold;
+  }
+  
+  @media (min-width: 576px) {
+    .equipment-crud-buttons-container {
+      justify-content: flex-end;
+    }
+  
+    .equipment-crud-button {
+      margin-left: 30px;
+      width: 270px;
+    }
+  }
+  
+  .equipment-crud-select__control {
+    border-radius: 10px !important;
+    font-size: 1em;
+    letter-spacing: -0.015em;
+    color: #263238;
+    height: 50px;
+  }
+  
+  .equipment-crud-select__placeholder {
+    color: #9E9E9E !important;
+  }
+  
+  .equipment-crud-select__indicator-separator {
+    display: none;
+  }
+  
+  @media (min-width: 992px) {
+    .equipment-crud-inputs-left-container {
+      margin-bottom: 0;
+    }
+  }
+  
