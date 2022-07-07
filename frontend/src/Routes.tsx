@@ -4,6 +4,7 @@ import Navbar from "components/Navbar";
 import Boards from "pages/Boards";
 import BoardInformations from "pages/BoardInformations";
 import Admin from "pages/Admin";
+import Auth from "pages/Admin/Auth";
 
 const Routes = () => (
   <BrowserRouter>
@@ -17,6 +18,10 @@ const Routes = () => (
       </Route>
       <Route path="/boards/:boardId">
         <BoardInformations />
+      </Route>
+      <Redirect from="/admin/auth" to="/admin/auth/login" exact />
+      <Route path="/admin/auth">
+        <Auth />
       </Route>
       <Redirect from="/admin" to="/admin/boards" exact />
       <Route path="/admin">

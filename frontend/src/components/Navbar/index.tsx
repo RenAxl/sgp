@@ -1,16 +1,16 @@
-import 'bootstrap/js/src/collapse.js';
-import { Link, NavLink } from 'react-router-dom';
+import "bootstrap/js/src/collapse.js";
+import { Link, NavLink } from "react-router-dom";
 
-import './styles.css';
+import "./styles.css";
 
 const Navbar = () => {
   return (
     <nav className="navbar navbar-expand-md navbar-dark bg-primary main-nav">
       <div className="container-fluid">
-        {' '}
+        {" "}
         {/* previne quebra de linha entre logo e itens */}
         <Link to="/" className="nav-logo-text">
-          <h4>SGB</h4>
+          <h4>SGP</h4>
         </Link>
         <button
           className="navbar-toggler"
@@ -42,6 +42,11 @@ const Navbar = () => {
             </li>
           </ul>
         </div>
+        
+        <div className="nav-login-logout">
+          <Link to="/admin/auth">LOGIN</Link>
+        </div>
+
       </div>
     </nav>
   );
