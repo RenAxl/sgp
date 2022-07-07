@@ -10,17 +10,14 @@ const Home = () => {
       <div className="base-card home-card">
         <div className="home-content-container">
           <div>
-            <h1>
-              Aprenda um pouco mais sobre placas de equipamentos de rede de
-              transporte
-            </h1>
+            <h1>Aprenda um pouco mais sobre rede de transporte</h1>
             <p>
-              Você terá acesso a informações placas de maneira objetiva e
-              direta.
+              Tenha acesso a informações relevantes de placas de equipamentos de rede
+              de transporte.
             </p>
           </div>
           <div>
-            <Link to="/products">
+            <Link to="/boards">
               <ButtonIcon text="Iniciar a consulta de placas" />
             </Link>
           </div>
