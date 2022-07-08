@@ -10,17 +10,31 @@ import EquipmentCrudCard from "../EquipmentCrudCard";
 
 import "./styles.css";
 
+type ControlComponentsData = {
+  activePage: number;
+};
+
 const List = () => {
 
   const [page, setPage] = useState<SpringPage<Equipment>>();
 
+  const [controlComponentsData, setControlComponentsData] =
+  useState<ControlComponentsData>({
+    activePage: 0,
+  });
+
+  const handlePageChange = (pageNumber: number) => {
+    setControlComponentsData({
+      activePage: pageNumber,
+    });
+  };
 
   const getEquipments = useCallback(() => {
     const config: AxiosRequestConfig = {
       method: "GET",
       url: "/equipments",
       params: {
-        page: 0,
+        page: controlComponentsData.activePage,
         size: 3,
         name: "",
       },
@@ -29,7 +43,7 @@ const List = () => {
     requestBackend(config).then((response) => {
       setPage(response.data);
     });
-  }, []);
+  }, [controlComponentsData]);
 
   useEffect(() => {
     getEquipments();
@@ -53,7 +67,12 @@ const List = () => {
         ))}
       </div>
 
-      <Pagination />
+      <Pagination
+        forcePage={page?.number}
+        pageCount={page ? page.totalPages : 0}
+        range={3}
+        onChange={handlePageChange}
+      />
     </div>
   );
 };

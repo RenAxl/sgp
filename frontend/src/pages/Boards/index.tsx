@@ -59,7 +59,7 @@ const Boards = () => {
       </div>
 
       <div className="row">
-        <Pagination />
+        <Pagination forcePage={2} pageCount={2} range={3} onChange={()=>{}} />
       </div>
     </div>
   );

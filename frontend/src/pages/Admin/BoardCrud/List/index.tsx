@@ -27,7 +27,7 @@ const List = () => {
           <BoardCrudCard />
         </div>
       </div>
-      <Pagination />
+      <Pagination forcePage={2} pageCount={2} range={3} onChange={()=>{}} />
     </div>
   );
 };

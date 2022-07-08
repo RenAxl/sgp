@@ -44,7 +44,7 @@ const Navbar = () => {
         </div>
         
         <div className="nav-login-logout">
-          <Link to="/admin/auth">LOGIN</Link>
+          <Link to="/admin/auth">Usuário X</Link>
         </div>
 
       </div>
