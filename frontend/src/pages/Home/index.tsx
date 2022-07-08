@@ -10,7 +10,7 @@ const Home = () => {
       <div className="base-card home-card">
         <div className="home-content-container">
           <div>
-            <h1>Aprenda um pouco mais sobre rede de transporte</h1>
+            <h1>Sistema de Gerência de Placas - SGP</h1>
             <p>
               Tenha acesso a informações relevantes de placas de equipamentos de rede
               de transporte.
