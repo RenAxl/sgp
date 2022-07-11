@@ -69,7 +69,7 @@ const List = () => {
       <div className="row">
         {page?.content.map((card) => (
           <div key={card.id} className="col-sm-6 col-md-12">
-            <BoardCrudCard card={card} />
+            <BoardCrudCard card={card} onDelete={getBoards}/>
           </div>
         ))}
       </div>
