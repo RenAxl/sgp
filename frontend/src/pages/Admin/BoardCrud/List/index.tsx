@@ -10,15 +10,30 @@ import BoardCrudCard from "../BoardCrudCard";
 
 import "./styles.css";
 
+type ControlComponentsData = {
+  activePage: number;
+};
+
 const List = () => {
   const [page, setPage] = useState<SpringPage<Card>>();
+
+  const [controlComponentsData, setControlComponentsData] =
+  useState<ControlComponentsData>({
+    activePage: 0,
+  });
+
+  const handlePageChange = (pageNumber: number) => {
+    setControlComponentsData({
+      activePage: pageNumber,
+    });
+  };
 
   const getBoards = useCallback(() => {
     const config: AxiosRequestConfig = {
       method: "GET",
       url: "/cards",
       params: {
-        page: 0,
+        page: controlComponentsData.activePage,
         size: 3,
         name: "",
       },
@@ -27,7 +42,7 @@ const List = () => {
     requestBackend(config).then((response) => {
       setPage(response.data);
     });
-  }, []);
+  }, [controlComponentsData]);
 
   useEffect(() => {
     getBoards();
@@ -51,7 +66,12 @@ const List = () => {
           </div>
         ))}
       </div>
-      <Pagination forcePage={2} pageCount={2} range={3} onChange={() => {}} />
+      <Pagination
+        forcePage={page?.number}
+        pageCount={page ? page.totalPages : 0}
+        range={3}
+        onChange={handlePageChange}
+      />
     </div>
   );
 };
