@@ -14,13 +14,26 @@ type UrlParams = {
 const Form = () => {
   const { equipmentId } = useParams<UrlParams>();
 
+  const isEditing = equipmentId !== 'create';
+
   const history = useHistory();
 
   const {
     register,
     handleSubmit,
     formState: { errors },
+    setValue,
   } = useForm<Equipment>();
+
+  useEffect(() => {
+    if (isEditing) {
+      requestBackend({ url: `/equipments/${equipmentId}` }).then((response) => {
+        const equipment = response.data as Equipment;
+
+        setValue('model', equipment.model);
+      });
+    }
+  }, [isEditing, equipmentId, setValue]);
 
   const onSubmit = (formData: Equipment) => {
     const data = {
@@ -28,8 +41,8 @@ const Form = () => {
     };
 
     const config: AxiosRequestConfig = {
-      method: "POST",
-      url: "equipments",
+      method: isEditing ? 'PUT' : 'POST',
+      url: isEditing ? `/equipments/${equipmentId}` : '/equipments',
       data,
     };
 
