@@ -34,8 +34,6 @@ const List = () => {
 
   const handleSubmitFilter = (data: BoardFilterData) => {
     setControlComponentsData({ activePage: 0, filterData: data });
-    console.log("Botão clicado");
-    console.log(data)
   };
 
   const getEquipments = useCallback(() => {
@@ -71,7 +69,7 @@ const List = () => {
       <div className="row">
       {page?.content.map((equipment) => (
           <div key={equipment.id} className="col-sm-6 col-md-12">
-            <EquipmentCrudCard equipment={equipment} />
+            <EquipmentCrudCard equipment={equipment} onDelete={getEquipments} />
           </div>
         ))}
       </div>

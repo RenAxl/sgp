@@ -6,6 +6,7 @@ INSERT INTO tb_equipment (model) VALUES ('Nokia 1830');
 INSERT INTO tb_equipment (model) VALUES ('Padtec L6400');
 INSERT INTO tb_equipment (model) VALUES ('Huawei 6800');
 INSERT INTO tb_equipment (model) VALUES ('Ciena 6500');
+INSERT INTO tb_equipment (model) VALUES ('NEC 2500A');
 
 INSERT INTO tb_card (model, feature, functionality, connection, reset_procedure, exchange_procedure, img_url) VALUES ('ISA ethernet 10G', 'Placa de 1 tributário ethernet de 10GB', 'Realiza analise de trafego ethernet no lado cliente e lado VCG', 'conecta a placa de agredado STM-64', 'Retirar do slot e aguardar 10 segundos para retornar, não há configuração para reset', 'Retirar a placa do slot e colocar a placa sobressalente, não há configuração para troca', 'https://raw.githubusercontent.com/devsuperior/dscatalog-resources/master/backend/img/1-big.jpg');
 INSERT INTO tb_card (model, feature, functionality, connection, reset_procedure, exchange_procedure, img_url) VALUES ('Loac', 'Placa amplificadora de entrada e saída', 'Consegue medir nível de potência de entrada e saída', 'conecta ao DGO ou a uma placa mux/demux', 'Retirar do slot e aguardar 10 segundos para retornar, não há configuração para reset', 'Retirar a placa do slot e colocar a placa sobressalente, não há configuração para troca', 'https://raw.githubusercontent.com/devsuperior/dscatalog-resources/master/backend/img/1-big.jpg');

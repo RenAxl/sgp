@@ -1,12 +1,38 @@
 import "./styles.css";
 import { Link } from "react-router-dom";
 import { Equipment } from "types/equipment";
+import { requestBackend } from "util/request";
+import { AxiosRequestConfig } from "axios";
+import { toast } from "react-toastify";
 
 type Props = {
   equipment: Equipment;
+  onDelete: Function;
 };
 
-const EquipmentCrudCard = ({ equipment }: Props) => {
+const EquipmentCrudCard = ({ equipment, onDelete }: Props) => {
+  const handleDelete = (equipmentId: number) => {
+    if (!window.confirm("Tem certeza que deseja deletar?")) {
+      return;
+    }
+
+    const config: AxiosRequestConfig = {
+      method: "DELETE",
+      url: `/equipments/${equipmentId}`,
+    };
+
+    requestBackend(config)
+      .then(() => {
+        onDelete();
+        toast.info(`Equipamento deletado com sucesso`)
+      })
+      .catch(() => {
+        toast.error(`Não foi possivel deletar este equipamento!
+      Favor verificar se não existe uma placa associado a ele ou se
+      você possui autorização para esta ação.`);
+      });
+  };
+
   return (
     <div className="base-card equipment-crud-card">
       <div className="equipment-crud-card-description">
@@ -15,7 +41,10 @@ const EquipmentCrudCard = ({ equipment }: Props) => {
         </div>
       </div>
       <div className="equipment-crud-card-buttons-container">
-        <button className="btn btn-outline-danger equipment-crud-card-button equipment-crud-card-button-first">
+        <button
+          onClick={() => handleDelete(equipment.id)}
+          className="btn btn-outline-danger equipment-crud-card-button equipment-crud-card-button-first"
+        >
           EXCLUIR
         </button>
         <Link to={`/admin/equipments/${equipment.id}`}>
