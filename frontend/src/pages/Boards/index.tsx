@@ -12,7 +12,7 @@ const Boards = () => {
         <h1>Consulta de Placas</h1>
       </div>
       <div className="boards-filter">
-      <BoardFilter text="Modelo da placa" />
+      <BoardFilter textPlaceholder = "Modelo da placa" onSubmitFilter={() => {}} />
       </div>
       <br />
       <div className="row">

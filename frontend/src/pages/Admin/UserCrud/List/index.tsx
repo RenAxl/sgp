@@ -14,7 +14,7 @@ const List = () => {
             ADICIONAR
           </button>
         </Link>
-        <BoardFilter text="Nome do Usuário"/>
+        <BoardFilter textPlaceholder = "Modelo da placa" onSubmitFilter={() => {}} />
       </div>
       <div className="row">
 
