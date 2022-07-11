@@ -34,7 +34,7 @@ public class EquipmentResource {
 	public ResponseEntity<Page<EquipmentDTO>> findAllPaged(
 			@RequestParam(value = "model", defaultValue = "") String model,
 			@RequestParam(value = "page", defaultValue = "0") Integer page,
-			@RequestParam(value = "linesPerPage", defaultValue = "4") Integer linesPerPage,
+			@RequestParam(value = "linesPerPage", defaultValue = "12") Integer linesPerPage,
 			@RequestParam(value = "direction", defaultValue = "ASC") String direction,
 			@RequestParam(value = "orderBy", defaultValue = "model") String orderBy
 			){

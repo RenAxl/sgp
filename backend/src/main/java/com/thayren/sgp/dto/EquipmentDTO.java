@@ -12,7 +12,7 @@ public class EquipmentDTO implements Serializable {
 
 	private Long id;
 	
-	@Size(min = 5, max = 60, message ="O modelo deve ter entre 5 a 60 caracteres")
+	@Size(min = 3, max = 60, message ="O modelo deve ter entre 5 a 60 caracteres")
 	@NotBlank(message = "Campo requerido")
 	private String model;
 
