@@ -10,16 +10,31 @@ import UserCrudCard from '../UserCrudCard';
 
 import './styles.css';
 
+type ControlComponentsData = {
+  activePage: number;
+};
+
 const List = () => {
 
   const [page, setPage] = useState<SpringPage<User>>();
+
+  const [controlComponentsData, setControlComponentsData] =
+  useState<ControlComponentsData>({
+    activePage: 0,
+  });
+
+  const handlePageChange = (pageNumber: number) => {
+    setControlComponentsData({
+      activePage: pageNumber,
+    });
+  };
 
   const getUsers = useCallback(() => {
     const config: AxiosRequestConfig = {
       method: "GET",
       url: "/users",
       params: {
-        page: 0,
+        page: controlComponentsData.activePage,
         size: 3,
         name: "",
       },
@@ -28,7 +43,7 @@ const List = () => {
     requestBackend(config).then((response) => {
       setPage(response.data);
     });
-  }, []);
+  }, [controlComponentsData]);
 
   useEffect(() => {
     getUsers();
@@ -51,7 +66,12 @@ const List = () => {
           </div>
         ))}
       </div>
-      <Pagination forcePage={2} pageCount={2} range={3} onChange={()=>{}} />
+      <Pagination
+        forcePage={page?.number}
+        pageCount={page ? page.totalPages : 0}
+        range={3}
+        onChange={handlePageChange}
+      />
     </div>
   );
 };
