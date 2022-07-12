@@ -51,7 +51,7 @@ const UserCrudCard = ({ user, onDelete }: Props) => {
         >
           EXCLUIR
         </button>
-        <Link to="/admin/users/:userId">
+        <Link to={`/admin/users/${user.id}`}>
           <button className="btn btn-outline-secondary user-crud-card-button">
             EDITAR
           </button>

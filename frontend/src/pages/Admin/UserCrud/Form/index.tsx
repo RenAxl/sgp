@@ -1,7 +1,7 @@
 import { AxiosRequestConfig } from "axios";
 import { useEffect, useState } from "react";
 import { Controller, useForm } from "react-hook-form";
-import { useHistory } from "react-router-dom";
+import { useHistory, useParams } from "react-router-dom";
 import Select from "react-select";
 import { toast } from "react-toastify";
 import { Role } from "types/role";
@@ -10,7 +10,15 @@ import { requestBackend } from "util/request";
 
 import "./styles.css";
 
+type UrlParams = {
+  userId: string;
+};
+
 const Form = () => {
+  const { userId } = useParams<UrlParams>();
+
+  const isEditing = userId !== 'create';
+
   const history = useHistory();
 
   const [selectRoles, setSelectRoles] = useState<Role[]>([]);
@@ -20,6 +28,7 @@ const Form = () => {
     handleSubmit,
     control,
     formState: { errors },
+    setValue,
   } = useForm<User>();
 
   useEffect(() => {
@@ -30,14 +39,27 @@ const Form = () => {
     setSelectRoles(options);
   }, []);
 
+  useEffect(() => {
+    if (isEditing) {
+      requestBackend({ url: `/users/${userId}` }).then((response) => {
+        const user = response.data as User;
+
+        setValue('name', user.name);
+        setValue('email', user.email);
+        setValue('password', user.password);
+        setValue('roles', user.roles);
+      });
+    }
+  }, [isEditing, userId, setValue]);
+
   const onSubmit = (formData: User) => {
     const data = {
       ...formData,
     };
 
     const config: AxiosRequestConfig = {
-      method: "POST",
-      url: "/users",
+      method: isEditing ? 'PUT' : 'POST',
+      url: isEditing ? `/users/${userId}` : '/users',
       data,
     };
 
