@@ -80,7 +80,7 @@ const Boards = () => {
         ) : (
           page?.content.map((card) => (
             <div key={card.id} className="col-sm-6 col-lg-4 col-xl-3">
-              <Link to={`/cards/${card.id}`}>
+              <Link to={`/boards/${card.id}`}>
                 <BoardCard card={card} />
               </Link>
             </div>

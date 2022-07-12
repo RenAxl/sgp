@@ -131,7 +131,7 @@
 @media (min-width: 1400px) {
     .img-container img {
         height: 480px;
-        width: auto;
+        width: 100%;
     }
 
     .description-container {
