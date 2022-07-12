@@ -35,7 +35,7 @@ public class CardResource {
 			@RequestParam(value = "equipmentId", defaultValue = "0") Long equipmentId,
 			@RequestParam(value = "model", defaultValue = "") String model,
 			@RequestParam(value = "page", defaultValue = "0") Integer page,
-			@RequestParam(value = "linesPerPage", defaultValue = "12") Integer linesPerPage,
+			@RequestParam(value = "linesPerPage", defaultValue = "8") Integer linesPerPage,
 			@RequestParam(value = "direction", defaultValue = "ASC") String direction,
 			@RequestParam(value = "orderBy", defaultValue = "model") String orderBy
 			){

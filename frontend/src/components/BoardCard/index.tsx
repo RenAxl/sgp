@@ -1,16 +1,20 @@
 import './styles.css';
 
-import CardImg from 'assets/images/newCard.png';
+import { Card } from 'types/card';
 
-const BoardCard = () => {
+type Props = {
+    card: Card;
+  };
+
+const BoardCard = ({ card }: Props) => {
 
     return (
         <div className="base-card board-card">
             <div className="card-top-container">
-                <img src={CardImg} alt="Modelo da Placa" />
+                <img src={card.imgUrl} alt={card.model} />
             </div>
             <div className="card-bottom-container">
-                <h6>Transponder 100G Padtec</h6>
+                <h6>{card.model}</h6>
             </div>
         </div>
     );
