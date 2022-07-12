@@ -55,7 +55,7 @@ const BoardCrudCard = ({ card, onDelete }: Props) => {
         >
           EXCLUIR
         </button>
-        <Link to="/admin/boards/:boardId">
+        <Link to={`/admin/boards/${card.id}`}>
           <button className="btn btn-outline-secondary board-crud-card-button">
             EDITAR
           </button>
@@ -66,3 +66,4 @@ const BoardCrudCard = ({ card, onDelete }: Props) => {
 };
 
 export default BoardCrudCard;
+

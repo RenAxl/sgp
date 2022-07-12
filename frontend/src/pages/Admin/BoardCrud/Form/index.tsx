@@ -1,7 +1,7 @@
 import { AxiosRequestConfig } from "axios";
 import { useEffect, useState } from "react";
 import { Controller, useForm } from "react-hook-form";
-import { useHistory } from "react-router-dom";
+import { useHistory, useParams } from "react-router-dom";
 import Select from "react-select";
 import { toast } from "react-toastify";
 import { Card } from "types/card";
@@ -10,7 +10,15 @@ import { requestBackend } from "util/request";
 
 import "./styles.css";
 
+type UrlParams = {
+  boardId: string;
+};
+
 const Form = () => {
+  const { boardId } = useParams<UrlParams>();
+
+  const isEditing = boardId !== 'create';
+
   const history = useHistory();
 
   const [selectEquipaments, setSelectEquipments] = useState<Equipment[]>([]);
@@ -19,6 +27,7 @@ const Form = () => {
     register,
     handleSubmit,
     formState: { errors },
+    setValue,
     control,
   } = useForm<Card>();
 
@@ -28,14 +37,33 @@ const Form = () => {
     });
   }, []);
 
+  useEffect(() => {
+    if (isEditing) {
+      console.log(boardId);
+      requestBackend({ url: `/cards/${boardId}` }).then((response) => {
+        const card = response.data as Card;
+
+        setValue('model', card.model);
+        setValue('imgUrl', card.imgUrl);
+        setValue('equipments', card.equipments);
+        setValue('feature', card.feature);
+        setValue('functionality', card.functionality);
+        setValue('connection', card.connection);
+        setValue('resetProcedure', card.resetProcedure);
+        setValue('exchangeProcedure', card.exchangeProcedure);
+
+      });
+    }
+  }, [isEditing, boardId, setValue]);
+
   const onSubmit = (formData: Card) => {
     const data = {
       ...formData,
     };
 
     const config: AxiosRequestConfig = {
-      method: "POST",
-      url: "/cards",
+      method: isEditing ? 'PUT' : 'POST',
+      url: isEditing ? `/cards/${boardId}` : '/cards',
       data,
     };
 

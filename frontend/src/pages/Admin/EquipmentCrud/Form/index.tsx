@@ -5,6 +5,7 @@ import { useHistory, useParams } from "react-router-dom";
 import { toast } from "react-toastify";
 import { Equipment } from "types/equipment";
 import { requestBackend } from "util/request";
+
 import "./styles.css";
 
 type UrlParams = {
