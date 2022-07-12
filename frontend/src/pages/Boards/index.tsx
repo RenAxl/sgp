@@ -7,6 +7,7 @@ import { Link } from "react-router-dom";
 import { Card } from "types/card";
 import { SpringPage } from "types/vendor/spring";
 import { requestBackend } from "util/request";
+import BoardLoader from "./BoardLoader";
 
 import "./styles.css";
 
@@ -17,6 +18,7 @@ type ControlComponentsData = {
 
 const Boards = () => {
   const [page, setPage] = useState<SpringPage<Card>>();
+  const [isLoading, setIsLoading] = useState(false);
 
   const [controlComponentsData, setControlComponentsData] =
     useState<ControlComponentsData>({
@@ -46,9 +48,14 @@ const Boards = () => {
       },
     };
 
-    requestBackend(config).then((response) => {
-      setPage(response.data);
-    });
+    setIsLoading(true);
+    requestBackend(config)
+      .then((response) => {
+        setPage(response.data);
+      })
+      .finally(() => {
+        setIsLoading(false);
+      });
   }, [controlComponentsData]);
 
   useEffect(() => {
@@ -68,13 +75,17 @@ const Boards = () => {
       </div>
       <br />
       <div className="row">
-        {page?.content.map((card) => (
-          <div key={card.id} className="col-sm-6 col-lg-4 col-xl-3">
-            <Link to={`/cards/${card.id}`}>
-              <BoardCard card={card} />
-            </Link>
-          </div>
-        ))}
+        {isLoading ? (
+          <BoardLoader />
+        ) : (
+          page?.content.map((card) => (
+            <div key={card.id} className="col-sm-6 col-lg-4 col-xl-3">
+              <Link to={`/cards/${card.id}`}>
+                <BoardCard card={card} />
+              </Link>
+            </div>
+          ))
+        )}
       </div>
 
       <div className="row">
