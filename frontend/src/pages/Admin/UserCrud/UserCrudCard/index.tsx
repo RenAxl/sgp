@@ -2,12 +2,36 @@ import "./styles.css";
 import { Link } from "react-router-dom";
 import Badge from "components/Badge";
 import { User } from "types/user";
+import { AxiosRequestConfig } from "axios";
+import { requestBackend } from "util/request";
+import { toast } from "react-toastify";
 
 type Props = {
   user: User;
+  onDelete: Function;
 };
 
-const UserCrudCard = ({ user }: Props) => {
+const UserCrudCard = ({ user, onDelete }: Props) => {
+  const handleDelete = (userId: number) => {
+    if (!window.confirm("Tem certeza que deseja deletar?")) {
+      return;
+    }
+
+    const config: AxiosRequestConfig = {
+      method: "DELETE",
+      url: `/users/${userId}`,
+    };
+
+    requestBackend(config)
+      .then(() => {
+        onDelete();
+        toast.info(`Usuário deletado com sucesso!`);
+      })
+      .catch(() => {
+        toast.error(`Erro ao tentar deletar um usuário!`);
+      });
+  };
+
   return (
     <div className="base-card user-crud-card">
       <div className="user-crud-card-description">
@@ -21,7 +45,10 @@ const UserCrudCard = ({ user }: Props) => {
         </div>
       </div>
       <div className="user-crud-card-buttons-container">
-        <button className="btn btn-outline-danger user-crud-card-button user-crud-card-button-first">
+        <button
+          className="btn btn-outline-danger user-crud-card-button user-crud-card-button-first"
+          onClick={() => handleDelete(user.id)}
+        >
           EXCLUIR
         </button>
         <Link to="/admin/users/:userId">
