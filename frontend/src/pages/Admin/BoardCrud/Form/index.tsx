@@ -65,6 +65,7 @@ const Form = () => {
       method: isEditing ? 'PUT' : 'POST',
       url: isEditing ? `/cards/${boardId}` : '/cards',
       data,
+      withCredentials: true,
     };
 
     requestBackend(config)

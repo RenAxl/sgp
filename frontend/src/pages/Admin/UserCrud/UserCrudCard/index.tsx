@@ -20,6 +20,7 @@ const UserCrudCard = ({ user, onDelete }: Props) => {
     const config: AxiosRequestConfig = {
       method: "DELETE",
       url: `/users/${userId}`,
+      withCredentials: true,
     };
 
     requestBackend(config)
@@ -62,3 +63,4 @@ const UserCrudCard = ({ user, onDelete }: Props) => {
 };
 
 export default UserCrudCard;
+

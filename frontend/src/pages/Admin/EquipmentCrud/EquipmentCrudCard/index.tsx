@@ -19,12 +19,13 @@ const EquipmentCrudCard = ({ equipment, onDelete }: Props) => {
     const config: AxiosRequestConfig = {
       method: "DELETE",
       url: `/equipments/${equipmentId}`,
+      withCredentials: true,
     };
 
     requestBackend(config)
       .then(() => {
         onDelete();
-        toast.info(`Equipamento deletado com sucesso`)
+        toast.info(`Equipamento deletado com sucesso`);
       })
       .catch(() => {
         toast.error(`Não foi possivel deletar este equipamento!

@@ -21,6 +21,7 @@ const BoardCrudCard = ({ card, onDelete }: Props) => {
     const config: AxiosRequestConfig = {
       method: "DELETE",
       url: `/cards/${cardId}`,
+      withCredentials: true,
     };
 
     requestBackend(config)

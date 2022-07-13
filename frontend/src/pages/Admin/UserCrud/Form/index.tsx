@@ -41,7 +41,7 @@ const Form = () => {
 
   useEffect(() => {
     if (isEditing) {
-      requestBackend({ url: `/users/${userId}` }).then((response) => {
+      requestBackend({ url: `/users/${userId}`, withCredentials: true }).then((response) => {
         const user = response.data as User;
 
         setValue('name', user.name);
@@ -61,6 +61,7 @@ const Form = () => {
       method: isEditing ? 'PUT' : 'POST',
       url: isEditing ? `/users/${userId}` : '/users',
       data,
+      withCredentials: true,
     };
 
     requestBackend(config)
@@ -182,3 +183,4 @@ const Form = () => {
 };
 
 export default Form;
+

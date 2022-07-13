@@ -1,14 +1,14 @@
-import { AxiosRequestConfig } from 'axios';
-import BoardFilter, { BoardFilterData } from 'components/BoardFilter';
-import Pagination from 'components/Pagination';
-import { useCallback, useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
-import { User } from 'types/user';
-import { SpringPage } from 'types/vendor/spring';
-import { requestBackend } from 'util/request';
-import UserCrudCard from '../UserCrudCard';
+import { AxiosRequestConfig } from "axios";
+import BoardFilter, { BoardFilterData } from "components/BoardFilter";
+import Pagination from "components/Pagination";
+import { useCallback, useEffect, useState } from "react";
+import { Link } from "react-router-dom";
+import { User } from "types/user";
+import { SpringPage } from "types/vendor/spring";
+import { requestBackend } from "util/request";
+import UserCrudCard from "../UserCrudCard";
 
-import './styles.css';
+import "./styles.css";
 
 type ControlComponentsData = {
   activePage: number;
@@ -16,14 +16,13 @@ type ControlComponentsData = {
 };
 
 const List = () => {
-
   const [page, setPage] = useState<SpringPage<User>>();
 
   const [controlComponentsData, setControlComponentsData] =
-  useState<ControlComponentsData>({
-    activePage: 0,
-    filterData: { text: "" },
-  });
+    useState<ControlComponentsData>({
+      activePage: 0,
+      filterData: { text: "" },
+    });
 
   const handlePageChange = (pageNumber: number) => {
     setControlComponentsData({
@@ -45,6 +44,7 @@ const List = () => {
         size: 3,
         name: controlComponentsData.filterData.text,
       },
+      withCredentials: true,
     };
 
     requestBackend(config).then((response) => {
@@ -64,10 +64,13 @@ const List = () => {
             ADICIONAR
           </button>
         </Link>
-        <BoardFilter textPlaceholder = "Nome do Usuário" onSubmitFilter={handleSubmitFilter} />
+        <BoardFilter
+          textPlaceholder="Nome do Usuário"
+          onSubmitFilter={handleSubmitFilter}
+        />
       </div>
       <div className="row">
-      {page?.content.map((user) => (
+        {page?.content.map((user) => (
           <div key={user.id} className="col-sm-6 col-md-12">
             <UserCrudCard user={user} onDelete={getUsers} />
           </div>
@@ -84,4 +87,3 @@ const List = () => {
 };
 
 export default List;
-

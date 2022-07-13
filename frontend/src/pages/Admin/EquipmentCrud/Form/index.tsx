@@ -45,6 +45,7 @@ const Form = () => {
       method: isEditing ? 'PUT' : 'POST',
       url: isEditing ? `/equipments/${equipmentId}` : '/equipments',
       data,
+      withCredentials: true,
     };
 
     requestBackend(config)
