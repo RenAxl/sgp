@@ -36,6 +36,10 @@
   display: none;
 }
 
+.nav-username {
+  display: none;
+}
+
 @media (min-width: 768px) {
   .nav-login-logout {
     display: unset;
@@ -47,5 +51,10 @@
 @media (min-width: 992px) {
   .nav-login-logout {
     margin-right: 40px;
+  }
+
+  .nav-username {
+    display: unset;
+    margin-right: 20px;
   }
 }

@@ -1,4 +1,4 @@
-const tokenKey = 'authData';
+const tokenKey = "authData";
 
 type LoginResponse = {
   access_token: string;
@@ -14,6 +14,10 @@ export const saveAuthData = (obj: LoginResponse) => {
 };
 
 export const getAuthData = () => {
-    const str = localStorage.getItem(tokenKey) ?? '{}';
-    return JSON.parse(str) as LoginResponse;
-  };
+  const str = localStorage.getItem(tokenKey) ?? "{}";
+  return JSON.parse(str) as LoginResponse;
+};
+
+export const removeAuthData = () => {
+  localStorage.removeItem(tokenKey);
+};

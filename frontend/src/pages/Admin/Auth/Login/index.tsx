@@ -1,8 +1,10 @@
+import { AuthContext } from "AuthContext";
 import ButtonIcon from "components/ButtonIcon";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useHistory, useLocation } from "react-router-dom";
 import { toast } from "react-toastify";
+import { getTokenData } from "util/auth";
 import { requestBackendLogin } from "util/request";
 import { saveAuthData } from "util/storage";
 
@@ -22,6 +24,8 @@ const Login = () => {
 
   const { from } = location.state || { from: { pathname: "/" } };
 
+  const { setAuthContextData } = useContext(AuthContext);
+
   const [hasError, setHasError] = useState(false);
 
   const history = useHistory();
@@ -38,12 +42,16 @@ const Login = () => {
         console.log(response.data);
         setHasError(false);
         saveAuthData(response.data);
+        setAuthContextData({
+          authenticated: true,
+          tokenData: getTokenData(),
+        })
         history.replace(from);
-        toast.info("Usuário Logado com sucesso");
+        toast.info("Usuário autenticado com sucesso");
       })
       .catch((error) => {
         setHasError(true);
-        toast.error("Erro ao tentar logar");
+        toast.error("Erro ao tentar autenticar");
       });
   };
 
