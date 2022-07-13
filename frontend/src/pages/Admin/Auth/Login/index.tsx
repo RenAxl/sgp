@@ -4,6 +4,7 @@ import { useForm } from "react-hook-form";
 import { useHistory, useLocation } from "react-router-dom";
 import { toast } from "react-toastify";
 import { requestBackendLogin } from "util/request";
+import { saveAuthData } from "util/storage";
 
 import "./styles.css";
 
@@ -36,6 +37,7 @@ const Login = () => {
       .then((response) => {
         console.log(response.data);
         setHasError(false);
+        saveAuthData(response.data);
         history.replace(from);
         toast.info("Usuário Logado com sucesso");
       })
