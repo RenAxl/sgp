@@ -1,5 +1,7 @@
 import axios, { AxiosRequestConfig } from "axios";
 import qs from "qs";
+import { toast } from "react-toastify";
+import history from "./history";
 import { getAuthData } from "./storage";
 
 export const BASE_URL =
@@ -43,3 +45,25 @@ export const requestBackendLogin = (loginData: LoginData) => {
     headers,
   });
 };
+
+
+axios.interceptors.response.use(
+  function (response) {
+    //
+    return response;
+  },
+  function (error) {
+    if (error.response.status === 401) {
+      history.push('/admin/auth');
+    
+      toast.error('Erro de resposta do servidor!  Você não possui autorização para esta requisição.')
+    }
+    if (error.response.status === 403) {
+      history.push('/admin/auth');
+    
+      toast.error('Erro de resposta do servidor!  Você não possui autorização para esta requisição.')
+    }
+    return Promise.reject(error);
+  }
+);
+  
