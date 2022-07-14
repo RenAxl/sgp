@@ -1,4 +1,5 @@
-import { Route, Switch } from "react-router-dom";
+import PrivateRoute from "components/PrivateRoute";
+import { Switch } from "react-router-dom";
 import BoardCrud from "./BoardCrud";
 import EquipmentCrud from "./EquipmentCrud";
 import Navbar from "./Navbar";
@@ -11,15 +12,15 @@ const Admin = () => (
     <Navbar />
     <div className="admin-content">
       <Switch>
-        <Route path="/admin/equipments">
+        <PrivateRoute path="/admin/equipments">
           <EquipmentCrud />
-        </Route>
-        <Route path="/admin/boards">
+        </PrivateRoute>
+        <PrivateRoute path="/admin/boards">
           <BoardCrud />
-        </Route>
-        <Route path="/admin/users">
+        </PrivateRoute>
+        <PrivateRoute path="/admin/users">
           <UserCrud />
-        </Route>
+        </PrivateRoute>
       </Switch>
     </div>
   </div>
