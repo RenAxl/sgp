@@ -34,7 +34,6 @@ const Navbar = () => {
     history.push("/");
   };
 
-
   return (
     <nav className="navbar navbar-expand-md navbar-dark bg-primary main-nav">
       <div className="container-fluid">
@@ -43,17 +42,7 @@ const Navbar = () => {
         <Link to="/" className="nav-logo-text">
           <h4>SGP</h4>
         </Link>
-        <button
-          className="navbar-toggler"
-          type="button"
-          data-bs-toggle="collapse"
-          data-bs-target="#dscatalog-navbar"
-          aria-controls="dscatalog-navbar"
-          aria-expanded="false"
-          aria-label="Toggle navigation"
-        >
-          <span className="navbar-toggler-icon"></span>
-        </button>
+        
         <div className="collapse navbar-collapse" id="dscatalog-navbar">
           <ul className="navbar-nav offset-md-2 main-menu">
             <li>
@@ -73,7 +62,6 @@ const Navbar = () => {
             </li>
           </ul>
         </div>
-        
         <div className="nav-login-logout">
           {authContextData.authenticated ? (
             <>
@@ -88,10 +76,21 @@ const Navbar = () => {
             <Link to="/admin/auth">LOGIN</Link>
           )}
         </div>
-
+        <button
+          className="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#dscatalog-navbar"
+          aria-controls="dscatalog-navbar"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span className="navbar-toggler-icon"></span>
+        </button>
       </div>
     </nav>
   );
 };
 
 export default Navbar;
+

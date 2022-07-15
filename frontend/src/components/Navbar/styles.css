@@ -33,7 +33,8 @@
 }
 
 .nav-login-logout {
-  display: none;
+  display: unset;
+  color: #fff;
 }
 
 .nav-username {
