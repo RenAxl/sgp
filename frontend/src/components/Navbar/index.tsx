@@ -56,12 +56,16 @@ const Navbar = () => {
               </NavLink>
             </li>
             <li>
+              {/*
               <NavLink to="/admin" activeClassName="active">
                 ADMIN
               </NavLink>
+  */}
             </li>
           </ul>
         </div>
+
+        {/*
         <div className="nav-login-logout">
           {authContextData.authenticated ? (
             <>
@@ -76,6 +80,8 @@ const Navbar = () => {
             <Link to="/admin/auth">LOGIN</Link>
           )}
         </div>
+          */}
+          
         <button
           className="navbar-toggler"
           type="button"
