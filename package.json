@@ -1,0 +1,16 @@
+{
+  "name": "sgp-heroku-frontend",
+  "version": "1.0.0",
+  "private": true,
+  "engines": {
+    "node": "14.21.3",
+    "npm": "6.14.18"
+  },
+  "scripts": {
+    "heroku-postbuild": "npm --prefix frontend ci --no-audit --no-fund && npm --prefix frontend run build",
+    "start": "serve -s frontend/build -l tcp://0.0.0.0:${PORT:-3000}"
+  },
+  "dependencies": {
+    "serve": "14.2.8"
+  }
+}

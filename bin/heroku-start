@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+case "${SGP_COMPONENT:-}" in
+  backend)
+    # JAVA_OPTS is a list of JVM options supplied by the Java buildpack.
+    exec java ${JAVA_OPTS:-} -Dserver.port="${PORT:-8080}" \
+      -jar backend/target/sgp-0.0.1-SNAPSHOT.jar
+    ;;
+  frontend)
+    exec npm start
+    ;;
+  *)
+    echo 'Configure SGP_COMPONENT como backend ou frontend.' >&2
+    exit 1
+    ;;
+esac

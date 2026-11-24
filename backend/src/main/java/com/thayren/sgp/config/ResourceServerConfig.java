@@ -3,6 +3,7 @@ package com.thayren.sgp.config;
 import java.util.Arrays;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -28,6 +29,9 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
 	
 	@Autowired
 	private JwtTokenStore tokenStore;
+
+	@Value("${cors.allowed-origins:http://localhost:3000}")
+	private String allowedOrigins;
 
 	private static final String[] PUBLIC = { "/oauth/token", "/h2-console/**" };
 	
@@ -60,7 +64,7 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
 	@Bean
 	public CorsConfigurationSource corsConfigurationSource() {
 		CorsConfiguration corsConfig = new CorsConfiguration();
-		corsConfig.setAllowedOriginPatterns(Arrays.asList("*"));
+		corsConfig.setAllowedOrigins(Arrays.asList(allowedOrigins.split(",")));
 		corsConfig.setAllowedMethods(Arrays.asList("POST", "GET", "PUT", "DELETE", "PATCH"));
 		corsConfig.setAllowCredentials(true);
 		corsConfig.setAllowedHeaders(Arrays.asList("Authorization", "Content-Type"));

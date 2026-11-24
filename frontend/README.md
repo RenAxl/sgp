@@ -1,46 +1,68 @@
-# Getting Started with Create React App
+# SGP — Frontend
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Frontend React executado em um container de desenvolvimento com **Node 14.21.3**
+e **npm 6.14.18**, versões compatíveis com o `node-sass 4.14.1` e com o
+`package-lock.json` do projeto. Não é necessário instalar Node ou npm na máquina:
+basta Docker com o plugin Docker Compose.
 
-## Available Scripts
+## Executar
 
-In the project directory, you can run:
+Na pasta `frontend`:
 
-### `npm start`
+```bash
+docker compose up -d --build
+```
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+Acesse **http://localhost:3000**. Para acompanhar a compilação:
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+```bash
+docker compose logs -f frontend
+```
 
-### `npm test`
+As alterações em `src` e `public` aparecem automaticamente no navegador.
+As dependências ficam dentro da imagem, sem usar o `node_modules` da máquina.
+Após alterar dependências ou outros arquivos de configuração, execute novamente
+`docker compose up -d --build`.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Para parar e remover o container:
 
-### `npm run build`
+```bash
+docker compose down
+```
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## Backend e porta
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+Por padrão, o frontend acessa a API em `http://localhost:8080`.
+O backend deve estar em execução separadamente. Como as requisições são feitas
+pelo navegador, a URL precisa ser acessível pela máquina que abre o frontend.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+Para usar outra API ou porta, informe as variáveis ao iniciar o serviço:
 
-### `npm run eject`
+```bash
+REACT_APP_BACKEND_URL=http://localhost:8081 FRONTEND_PORT=3001 docker compose up -d --build
+```
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+Também é possível definir essas variáveis em um arquivo `.env` nesta pasta.
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## Dependências e build
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+Use npm e mantenha `package-lock.json` sincronizado com `package.json`.
+O Docker usa `npm ci` para instalar exatamente as versões registradas no lockfile;
+o `yarn.lock` antigo não é utilizado.
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+Para verificar a compilação de produção:
 
-## Learn More
+```bash
+docker compose run --rm --no-deps frontend npm run build
+```
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+Esse comando gera o build no container temporário. Para copiá-lo para a máquina
+com o serviço em execução:
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+```bash
+docker compose exec frontend npm run build
+docker compose cp frontend:/app/build ./build
+```
+
+O ambiente Docker foi preparado para desenvolvimento e preserva as versões
+legadas exigidas pelas dependências atuais do projeto.
